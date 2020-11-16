@@ -1,2 +1,4 @@
 # stickerstealer
-steal the stickers program
+Requirements
+pip install requests
+pip install beautifulsoup
