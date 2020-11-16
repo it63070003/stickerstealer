@@ -1,4 +1,6 @@
 # stickerstealer
-Requirements
+<h1>Requirements</h1>
+<br>
 pip install requests
+<br>
 pip install beautifulsoup
