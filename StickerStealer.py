@@ -18,6 +18,13 @@ def main():
         url_list[i] = url_list[i][start:stop]
     #url_list : Sticker Image URLs
     #Download Every Images
+    img_num = 0
+    for i in url_list:
+        r = requests.get(i)
+        img_num += 1
+        with open(str(img_num)+".png", "wb") as file:
+            file.write(r.content)
+
 
 
 main()
