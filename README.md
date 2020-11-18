@@ -3,4 +3,4 @@
 <br>
 pip install requests
 <br>
-pip install beautifulsoup
+pip install bs4
