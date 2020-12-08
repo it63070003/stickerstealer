@@ -1,0 +1,1 @@
+py StickerStealer.py
