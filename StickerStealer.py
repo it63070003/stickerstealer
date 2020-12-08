@@ -1,12 +1,20 @@
-"""Sticker Stealer"""
+import PySimpleGUI as sg 
 import requests
 from bs4 import BeautifulSoup
 
+layout = [  [sg.Text("Insert Sticker URL:")],
+            [sg.Input()],
+            [sg.Button('Ok')] ]
 
-def main():
+window = sg.Window('Window Title', layout)
+
+
+event, values = window.read()
+
+# Do something with the information gathered
+def main(link):
     """MainFunc"""
     #Get Website Code
-    link = input("Insert Sticker URL:")
     web_code = requests.get(link).content
     soup = BeautifulSoup(web_code, "html.parser")
     #Find all Sticker Images
@@ -24,7 +32,6 @@ def main():
         img_num += 1
         with open(str(img_num)+".png", "wb") as file:
             file.write(r.content)
+main(values[0])
 
-
-
-main()
+window.close()
