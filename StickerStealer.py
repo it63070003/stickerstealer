@@ -1,5 +1,6 @@
 import PySimpleGUI as sg 
 import requests
+import os
 from bs4 import BeautifulSoup
 
 layout = [  [sg.Text("Insert Sticker URL:")],
@@ -24,13 +25,21 @@ def main(link):
         start = url_list[i].index("url") + 4
         stop = url_list[i].index(";")
         url_list[i] = url_list[i][start:stop]
-    #url_list : Sticker Image URLs
+    #get sticker name and assign new path
+    sticker_name = soup.title.text
+    back_index = sticker_name.index(" – LINE stickers | LINE STORE")
+    sticker_name = sticker_name[:back_index]
+    for i in (":", "\\", "/", "*", "?", "\"", ">", "<", "|"):
+        sticker_name = sticker_name.replace(i, "")
+    newpath = sticker_name + "\\"
     #Download Every Images
     img_num = 0
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
     for i in url_list:
         r = requests.get(i)
         img_num += 1
-        with open(str(img_num)+".png", "wb") as file:
+        with open(newpath+str(img_num)+".jpg", "wb") as file:
             file.write(r.content)
 main(values[0])
 
