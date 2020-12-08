@@ -16,6 +16,12 @@ event, values = window.read()
 def main(link):
     """MainFunc"""
     #Get Website Code
+    link = link.split("/")
+    for i in link:
+        if i.isnumeric():
+            link = i
+            break
+    link = "https://store.line.me/stickershop/product/" + link + "/en"
     web_code = requests.get(link).content
     soup = BeautifulSoup(web_code, "html.parser")
     #Find all Sticker Images
