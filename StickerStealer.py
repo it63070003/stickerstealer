@@ -1,11 +1,13 @@
 import PySimpleGUI as sg 
 import requests
-import os
 from bs4 import BeautifulSoup
+import os
 
 layout = [  [sg.Text("Insert Sticker URL:")],
-            [sg.Input()],
-            [sg.Button('Ok')] ]
+            [sg.Input(key='stickerlink')],
+            [sg.Text("Path:")],
+            [sg.Input(key='path'), sg.FolderBrowse()],
+            [sg.Button('Ok')]]
 
 window = sg.Window('Window Title', layout)
 
@@ -13,7 +15,7 @@ window = sg.Window('Window Title', layout)
 event, values = window.read()
 
 # Do something with the information gathered
-def main(link):
+def main(link, path):
     """MainFunc"""
     #Get Website Code
     link = link.split("/")
@@ -37,7 +39,7 @@ def main(link):
     sticker_name = sticker_name[:back_index]
     for i in (":", "\\", "/", "*", "?", "\"", ">", "<", "|"):
         sticker_name = sticker_name.replace(i, "")
-    newpath = sticker_name + "\\"
+    newpath =path+ "\\" + sticker_name + "\\"
     #Download Every Images
     img_num = 0
     if not os.path.exists(newpath):
@@ -47,6 +49,6 @@ def main(link):
         img_num += 1
         with open(newpath+str(img_num)+"_"+sticker_id+".jpg", "wb") as file:
             file.write(r.content)
-main(values[0])
+main(values['stickerlink'], values['path'])
 
 window.close()
