@@ -19,9 +19,9 @@ def main(link):
     link = link.split("/")
     for i in link:
         if i.isnumeric():
-            link = i
+            sticker_id = i
             break
-    link = "https://store.line.me/stickershop/product/" + link + "/en"
+    link = "https://store.line.me/stickershop/product/" + sticker_id + "/en"
     web_code = requests.get(link).content
     soup = BeautifulSoup(web_code, "html.parser")
     #Find all Sticker Images
@@ -45,7 +45,7 @@ def main(link):
     for i in url_list:
         r = requests.get(i)
         img_num += 1
-        with open(newpath+str(img_num)+".jpg", "wb") as file:
+        with open(newpath+str(img_num)+"_"+sticker_id+".jpg", "wb") as file:
             file.write(r.content)
 main(values[0])
 
