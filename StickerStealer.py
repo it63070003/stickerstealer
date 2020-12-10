@@ -7,12 +7,9 @@ layout = [  [sg.Text("Insert Sticker URL:")],
             [sg.Input(key='stickerlink')],
             [sg.Text("Path:")],
             [sg.Input(key='path'), sg.FolderBrowse()],
-            [sg.Button('Ok')]]
+            [sg.Button('Ok'), sg.Button('Close')]]
 
 window = sg.Window('Window Title', layout)
-
-
-event, values = window.read()
 
 # Do something with the information gathered
 def main(link, path):
@@ -49,6 +46,12 @@ def main(link, path):
         img_num += 1
         with open(newpath+str(img_num)+"_"+sticker_id+".jpg", "wb") as file:
             file.write(r.content)
-main(values['stickerlink'], values['path'])
+
+while True:
+    event, values = window.read()
+    if event is None or event == 'Close':
+        break
+    else:
+        main(values['stickerlink'], values['path'])
 
 window.close()
