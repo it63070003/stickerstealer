@@ -44,7 +44,7 @@ def main(link, path):
     for i in url_list:
         r = requests.get(i)
         img_num += 1
-        with open(newpath+str(img_num)+"_"+sticker_id+".jpg", "wb") as file:
+        with open(newpath+str(img_num)+"_"+sticker_id+".png", "wb") as file:
             file.write(r.content)
 
 while True:
