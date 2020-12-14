@@ -1,5 +1,6 @@
 # stickerstealer
 1. Download Python และติดตั้งลงเครื่องคอมพิวเตอร์
+
 2. คลิก setup.bat เพื่อติดตั้ง Module ทั้ง 3 ตัวลงเครื่องคอมพิวเตอร์
 
 3. คลิก StickerStealer.bat
